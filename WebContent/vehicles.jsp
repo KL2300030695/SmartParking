@@ -166,6 +166,10 @@
                                     <div class="mt-2" style="font-size:0.75rem; font-weight:700; color:#1e293b; background:#e2e8f0; border-radius:4px; padding:2px;">
                                         <%= slot.getVehicleNumber().toUpperCase() %>
                                     </div>
+                                    <form action="releaseSlot" method="post" class="mt-2">
+                                        <input type="hidden" name="slotNumber" value="<%= slot.getSlotNumber() %>">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger w-100" style="font-size:0.7rem; padding:2px 0;">Release</button>
+                                    </form
                                 <% } else { %>
                                     <div class="mt-2" style="font-size:0.75rem; font-weight:600; color:#16a34a; padding:2px;">
                                         Available
