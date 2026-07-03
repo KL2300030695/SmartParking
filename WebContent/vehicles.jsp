@@ -120,46 +120,66 @@
                 </div>
             </div>
 
-            <!-- Slot Table -->
-            <div class="form-section-header">
-                <span class="section-icon"><i class="bi bi-grid-3x3-gap"></i></span>
-                All Parking Slots
+            <!-- Visual Slot Grid -->
+            <div class="form-section-header mt-4">
+                <span class="section-icon"><i class="bi bi-geo-alt-fill"></i></span>
+                Live Parking Layout
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover" style="font-size:0.85rem;">
-                    <thead style="background:#0f1d44; color:#fff;">
-                        <tr>
-                            <th>Slot</th>
-                            <th>Floor</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Vehicle</th>
-                            <th>Owner</th>
-                            <th>Since</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for (ParkingSlot slot : allSlots) { %>
-                        <tr>
-                            <td><strong><%= slot.getSlotNumber() %></strong></td>
-                            <td><%= slot.getFloorLevel() %></td>
-                            <td><%= slot.getVehicleType() %></td>
-                            <td>
+            <% 
+               String currentFloor = "";
+               for (int i = 0; i < allSlots.size(); i++) {
+                   ParkingSlot slot = allSlots.get(i);
+                   
+                   // When floor changes, close the previous div (if not first) and start a new one
+                   if (!slot.getFloorLevel().equals(currentFloor)) {
+                       if (i > 0) {
+                           out.print("</div></div>"); 
+                       }
+                       currentFloor = slot.getFloorLevel();
+            %>
+                       <div class="mb-5">
+                           <h5 class="mb-3" style="color:#0f1d44; font-weight:700; border-bottom:2px solid #e2e8f0; padding-bottom:8px;">
+                               <i class="bi bi-layers text-primary me-2"></i><%= currentFloor %>
+                           </h5>
+                           <div class="row g-3">
+            <%
+                   }
+                   
+                   String bgClass = slot.isOccupied() ? "bg-danger" : "bg-success";
+                   String iconColor = slot.isOccupied() ? "#dc2626" : "#16a34a";
+                   String icon = "bi-car-front-fill";
+                   if (slot.getVehicleType().equals("Bike")) icon = "bi-bicycle";
+                   else if (slot.getVehicleType().equals("SUV")) icon = "bi-truck";
+            %>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="card h-100 text-center shadow-sm" style="border:radius:10px; overflow:hidden; border:1px solid <%= slot.isOccupied() ? "#fca5a5" : "#bbf7d0" %>;">
+                            <div class="card-header py-1 text-white <%= bgClass %>" style="font-size:0.85rem; font-weight:700; border-bottom:none;">
+                                <%= slot.getSlotNumber() %>
+                            </div>
+                            <div class="card-body p-2" style="background:<%= slot.isOccupied() ? "#fef2f2" : "#f0fdf4" %>;">
+                                <i class="bi <%= icon %>" style="font-size:2.5rem; color:<%= iconColor %>;"></i>
+                                <div class="mt-1" style="font-size:0.75rem; font-weight:600; color:#475569;">
+                                    <%= slot.getVehicleType() %>
+                                </div>
                                 <% if (slot.isOccupied()) { %>
-                                    <span class="sp-badge sp-badge-red">Occupied</span>
+                                    <div class="mt-2" style="font-size:0.75rem; font-weight:700; color:#1e293b; background:#e2e8f0; border-radius:4px; padding:2px;">
+                                        <%= slot.getVehicleNumber().toUpperCase() %>
+                                    </div>
                                 <% } else { %>
-                                    <span class="sp-badge sp-badge-green">Available</span>
+                                    <div class="mt-2" style="font-size:0.75rem; font-weight:600; color:#16a34a; padding:2px;">
+                                        Available
+                                    </div>
                                 <% } %>
-                            </td>
-                            <td><%= slot.getVehicleNumber() != null ? slot.getVehicleNumber() : "-" %></td>
-                            <td><%= slot.getOwnerName() != null ? slot.getOwnerName() : "-" %></td>
-                            <td><%= slot.getOccupiedSince() != null ? slot.getOccupiedSince() : "-" %></td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
-            </div>
+                            </div>
+                        </div>
+                    </div>
+            <% 
+               } 
+               if (allSlots.size() > 0) {
+                   out.print("</div></div>");
+               }
+            %>
         </div>
     </div>
 
