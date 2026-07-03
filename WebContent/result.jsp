@@ -96,6 +96,10 @@
                             <span class="rcpt-value"><%= bill.getVehicleType() %></span>
                         </div>
                         <div class="rcpt-row">
+                            <span class="rcpt-label">Assigned Slot</span>
+                            <span class="rcpt-value"><span class="sp-badge sp-badge-green"><%= bill.getSlotNumber() != null ? bill.getSlotNumber() : "N/A" %></span></span>
+                        </div>
+                        <div class="rcpt-row">
                             <span class="rcpt-label">Entry</span>
                             <span class="rcpt-value"><%= entryStr %></span>
                         </div>

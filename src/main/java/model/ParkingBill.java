@@ -11,6 +11,7 @@ public class ParkingBill {
     private String contactNumber;
     private String vehicleNumber;
     private String vehicleType;
+    private String slotNumber;
     
     private LocalDateTime entryTime;
     private LocalDateTime exitTime;
@@ -43,6 +44,14 @@ public class ParkingBill {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    public String getSlotNumber() {
+        return slotNumber;
+    }
+
+    public void setSlotNumber(String slotNumber) {
+        this.slotNumber = slotNumber;
     }
 
     public String getVehicleNumber() {

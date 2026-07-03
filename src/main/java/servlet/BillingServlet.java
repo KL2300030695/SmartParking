@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.ParkingBill;
 import util.BillingCalculator;
 import dao.ParkingBillDAO;
+import dao.ParkingSlotDAO;
 
 @WebServlet("/calculateBill")
 public class BillingServlet extends HttpServlet {
@@ -86,6 +87,15 @@ public class BillingServlet extends HttpServlet {
         
         // Calculate
         bill = BillingCalculator.calculateBill(bill);
+        
+        // Assign Parking Slot
+        ParkingSlotDAO slotDao = new ParkingSlotDAO();
+        String assignedSlot = slotDao.assignSlot(vehicleType, vehicleNumber, ownerName);
+        if (assignedSlot != null) {
+            bill.setSlotNumber(assignedSlot);
+        } else {
+            bill.setSlotNumber("N/A");
+        }
         
         // Save to Database
         ParkingBillDAO dao = new ParkingBillDAO();
