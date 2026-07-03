@@ -76,8 +76,11 @@ graph TB
 ```mermaid
 classDiagram
     class ParkingBill {
+        -String ownerName
+        -String contactNumber
         -String vehicleNumber
         -String vehicleType
+        -String slotNumber
         -LocalDateTime entryTime
         -LocalDateTime exitTime
         -long totalDurationMinutes
@@ -88,10 +91,16 @@ classDiagram
         -boolean lostTicket
         -boolean dailyCapApplied
         -double totalAmount
+        +getOwnerName() String
+        +setOwnerName(String) void
+        +getContactNumber() String
+        +setContactNumber(String) void
         +getVehicleNumber() String
         +setVehicleNumber(String) void
         +getVehicleType() String
         +setVehicleType(String) void
+        +getSlotNumber() String
+        +setSlotNumber(String) void
         +getEntryTime() LocalDateTime
         +setEntryTime(LocalDateTime) void
         +getExitTime() LocalDateTime
@@ -141,18 +150,71 @@ classDiagram
         +getConnection() Connection$
     }
 
+    class ParkingSlot {
+        -int slotId
+        -String slotNumber
+        -String floorLevel
+        -String vehicleType
+        -boolean occupied
+        -String vehicleNumber
+        -String ownerName
+        -String occupiedSince
+        +getSlotId() int
+        +setSlotId(int) void
+        +getSlotNumber() String
+        +setSlotNumber(String) void
+        +getFloorLevel() String
+        +setFloorLevel(String) void
+        +getVehicleType() String
+        +setVehicleType(String) void
+        +isOccupied() boolean
+        +setOccupied(boolean) void
+        +getVehicleNumber() String
+        +setVehicleNumber(String) void
+        +getOwnerName() String
+        +setOwnerName(String) void
+        +getOccupiedSince() String
+        +setOccupiedSince(String) void
+    }
+
+    class ParkingSlotDAO {
+        +assignSlot(String, String, String) String
+        +releaseSlot(String) void
+        +getAllSlots() List~ParkingSlot~
+        +getSlotCounts(String) int[]
+    }
+
+    class VehiclesServlet {
+        -long serialVersionUID
+        +doGet(HttpServletRequest, HttpServletResponse) void
+    }
+
+    class ReportsServlet {
+        -long serialVersionUID
+        +doGet(HttpServletRequest, HttpServletResponse) void
+    }
+
     BillingServlet --> BillingCalculator : calls
     BillingServlet --> ParkingBill : creates
     BillingServlet --> ParkingBillDAO : uses
+    BillingServlet --> ParkingSlotDAO : uses
     BillingCalculator --> ParkingBill : computes
     ParkingBillDAO --> DBConnection : gets connection
     ParkingBillDAO --> ParkingBill : persists
+    ParkingSlotDAO --> DBConnection : gets connection
+    ParkingSlotDAO --> ParkingSlot : manipulates
+    VehiclesServlet --> ParkingSlotDAO : uses
+    ReportsServlet --> ParkingBillDAO : uses
 
     style ParkingBill fill:#dbeafe,stroke:#2563eb
     style BillingCalculator fill:#dcfce7,stroke:#16a34a
     style BillingServlet fill:#fef3c7,stroke:#d97706
+    style VehiclesServlet fill:#fef3c7,stroke:#d97706
+    style ReportsServlet fill:#fef3c7,stroke:#d97706
     style ParkingBillDAO fill:#fce7f3,stroke:#db2777
+    style ParkingSlotDAO fill:#fbcfe8,stroke:#ec4899
     style DBConnection fill:#f3e8ff,stroke:#9333ea
+    style ParkingSlot fill:#e0e7ff,stroke:#4f46e5
 ```
 
 ---
@@ -212,8 +274,11 @@ flowchart TD
 erDiagram
     PARKING_BILLS {
         INT id PK "AUTO_INCREMENT"
+        VARCHAR owner_name
+        VARCHAR contact_number
         VARCHAR vehicle_number "NOT NULL"
         VARCHAR vehicle_type "NOT NULL"
+        VARCHAR slot_number
         DATETIME entry_time
         DATETIME exit_time
         BIGINT total_duration_minutes
@@ -226,6 +291,19 @@ erDiagram
         DECIMAL total_amount
         TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
     }
+
+    PARKING_SLOTS {
+        INT slot_id PK "AUTO_INCREMENT"
+        VARCHAR slot_number "NOT NULL UNIQUE"
+        VARCHAR floor_level "NOT NULL"
+        VARCHAR vehicle_type "NOT NULL"
+        BOOLEAN is_occupied "DEFAULT FALSE"
+        VARCHAR vehicle_number
+        VARCHAR owner_name
+        DATETIME occupied_since
+    }
+
+    PARKING_BILLS }o--o| PARKING_SLOTS : "occupies"
 ```
 
 ---
