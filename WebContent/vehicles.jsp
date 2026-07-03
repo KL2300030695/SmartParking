@@ -153,7 +153,7 @@
                    else if (slot.getVehicleType().equals("SUV")) icon = "bi-truck";
             %>
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="card h-100 text-center shadow-sm" style="border:radius:10px; overflow:hidden; border:1px solid <%= slot.isOccupied() ? "#fca5a5" : "#bbf7d0" %>;">
+                        <div class="card h-100 text-center shadow-sm" style="border-radius:10px; overflow:hidden; border:1px solid <%= slot.isOccupied() ? "#fca5a5" : "#bbf7d0" %>;">
                             <div class="card-header py-1 text-white <%= bgClass %>" style="font-size:0.85rem; font-weight:700; border-bottom:none;">
                                 <%= slot.getSlotNumber() %>
                             </div>
@@ -169,7 +169,7 @@
                                     <form action="releaseSlot" method="post" class="mt-2">
                                         <input type="hidden" name="slotNumber" value="<%= slot.getSlotNumber() %>">
                                         <button type="submit" class="btn btn-sm btn-outline-danger w-100" style="font-size:0.7rem; padding:2px 0;">Release</button>
-                                    </form
+                                    </form>
                                 <% } else { %>
                                     <div class="mt-2" style="font-size:0.75rem; font-weight:600; color:#16a34a; padding:2px;">
                                         Available
