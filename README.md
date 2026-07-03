@@ -206,15 +206,15 @@ classDiagram
     VehiclesServlet --> ParkingSlotDAO : uses
     ReportsServlet --> ParkingBillDAO : uses
 
-    style ParkingBill fill:#dbeafe,stroke:#2563eb
-    style BillingCalculator fill:#dcfce7,stroke:#16a34a
-    style BillingServlet fill:#fef3c7,stroke:#d97706
-    style VehiclesServlet fill:#fef3c7,stroke:#d97706
-    style ReportsServlet fill:#fef3c7,stroke:#d97706
-    style ParkingBillDAO fill:#fce7f3,stroke:#db2777
-    style ParkingSlotDAO fill:#fbcfe8,stroke:#ec4899
-    style DBConnection fill:#f3e8ff,stroke:#9333ea
-    style ParkingSlot fill:#e0e7ff,stroke:#4f46e5
+    style ParkingBill fill:#dbeafe,stroke:#2563eb,color:#000
+    style BillingCalculator fill:#dcfce7,stroke:#16a34a,color:#000
+    style BillingServlet fill:#fef3c7,stroke:#d97706,color:#000
+    style VehiclesServlet fill:#fef3c7,stroke:#d97706,color:#000
+    style ReportsServlet fill:#fef3c7,stroke:#d97706,color:#000
+    style ParkingBillDAO fill:#fce7f3,stroke:#db2777,color:#000
+    style ParkingSlotDAO fill:#fbcfe8,stroke:#ec4899,color:#000
+    style DBConnection fill:#f3e8ff,stroke:#9333ea,color:#000
+    style ParkingSlot fill:#e0e7ff,stroke:#4f46e5,color:#000
 ```
 
 ---
@@ -260,10 +260,10 @@ flowchart TD
     Y --> Z["Forward to result.jsp"]
     Z --> AA([Display Professional Receipt])
 
-    style A fill:#eff6ff,stroke:#3b82f6
-    style AA fill:#f0fdf4,stroke:#16a34a
-    style N fill:#fef2f2,stroke:#ef4444
-    style P fill:#f0fdf4,stroke:#16a34a
+    style A fill:#eff6ff,stroke:#3b82f6,color:#000
+    style AA fill:#f0fdf4,stroke:#16a34a,color:#000
+    style N fill:#fef2f2,stroke:#ef4444,color:#000
+    style P fill:#f0fdf4,stroke:#16a34a,color:#000
 ```
 
 ---
