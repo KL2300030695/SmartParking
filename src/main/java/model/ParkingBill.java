@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
  */
 public class ParkingBill {
     
+    private String ownerName;
+    private String contactNumber;
     private String vehicleNumber;
     private String vehicleType;
     
@@ -25,6 +27,22 @@ public class ParkingBill {
     private double totalAmount;
     
     public ParkingBill() {
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     public String getVehicleNumber() {

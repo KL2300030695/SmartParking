@@ -25,6 +25,8 @@ public class BillingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
+        String ownerName = request.getParameter("ownerName");
+        String contactNumber = request.getParameter("contactNumber");
         String vehicleNumber = request.getParameter("vehicleNumber");
         String vehicleType = request.getParameter("vehicleType");
         
@@ -74,6 +76,8 @@ public class BillingServlet extends HttpServlet {
 
         // Build Model
         ParkingBill bill = new ParkingBill();
+        bill.setOwnerName(ownerName);
+        bill.setContactNumber(contactNumber);
         bill.setVehicleNumber(vehicleNumber);
         bill.setVehicleType(vehicleType);
         bill.setEntryTime(entryDateTime);

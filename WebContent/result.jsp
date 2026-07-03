@@ -80,6 +80,14 @@
 
                     <div class="receipt-content">
                         <div class="rcpt-row">
+                            <span class="rcpt-label">Owner Name</span>
+                            <span class="rcpt-value"><%= bill.getOwnerName() != null ? bill.getOwnerName() : "N/A" %></span>
+                        </div>
+                        <div class="rcpt-row">
+                            <span class="rcpt-label">Contact Number</span>
+                            <span class="rcpt-value"><%= bill.getContactNumber() != null ? bill.getContactNumber() : "N/A" %></span>
+                        </div>
+                        <div class="rcpt-row">
                             <span class="rcpt-label">Vehicle Number</span>
                             <span class="rcpt-value"><%= bill.getVehicleNumber().toUpperCase() %></span>
                         </div>

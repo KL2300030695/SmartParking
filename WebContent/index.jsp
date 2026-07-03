@@ -86,6 +86,23 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Owner Name <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                            <input type="text" class="form-control" name="ownerName" placeholder="e.g., Rahul Sharma" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Contact Number <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+                            <input type="tel" class="form-control" name="contactNumber" placeholder="e.g., 9876543210" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">Vehicle Number <span class="text-danger">*</span></label>
                         <div class="input-group">

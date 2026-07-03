@@ -12,9 +12,9 @@ public class ParkingBillDAO {
 
     public void saveBill(ParkingBill bill) {
         String sql = "INSERT INTO parking_bills " +
-                     "(vehicle_number, vehicle_type, entry_time, exit_time, total_duration_minutes, " +
+                     "(owner_name, contact_number, vehicle_number, vehicle_type, entry_time, exit_time, total_duration_minutes, " +
                      "billable_hours, grace_applied, hourly_rate, parking_fee, lost_ticket, daily_cap_applied, total_amount) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = DBConnection.getConnection()) {
              
@@ -24,30 +24,32 @@ public class ParkingBillDAO {
             }
             
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, bill.getVehicleNumber());
-                stmt.setString(2, bill.getVehicleType());
+                stmt.setString(1, bill.getOwnerName());
+                stmt.setString(2, bill.getContactNumber());
+                stmt.setString(3, bill.getVehicleNumber());
+                stmt.setString(4, bill.getVehicleType());
             
             // Handle null times in case of lost ticket
             if (bill.getEntryTime() != null) {
-                stmt.setTimestamp(3, Timestamp.valueOf(bill.getEntryTime()));
+                stmt.setTimestamp(5, Timestamp.valueOf(bill.getEntryTime()));
             } else {
-                stmt.setNull(3, java.sql.Types.TIMESTAMP);
+                stmt.setNull(5, java.sql.Types.TIMESTAMP);
             }
             
             if (bill.getExitTime() != null) {
-                stmt.setTimestamp(4, Timestamp.valueOf(bill.getExitTime()));
+                stmt.setTimestamp(6, Timestamp.valueOf(bill.getExitTime()));
             } else {
-                stmt.setNull(4, java.sql.Types.TIMESTAMP);
+                stmt.setNull(6, java.sql.Types.TIMESTAMP);
             }
             
-            stmt.setLong(5, bill.getTotalDurationMinutes());
-            stmt.setLong(6, bill.getBillableHours());
-            stmt.setBoolean(7, bill.isGraceApplied());
-            stmt.setDouble(8, bill.getHourlyRate());
-            stmt.setDouble(9, bill.getParkingFee());
-            stmt.setBoolean(10, bill.isLostTicket());
-            stmt.setBoolean(11, bill.isDailyCapApplied());
-            stmt.setDouble(12, bill.getTotalAmount());
+            stmt.setLong(7, bill.getTotalDurationMinutes());
+            stmt.setLong(8, bill.getBillableHours());
+            stmt.setBoolean(9, bill.isGraceApplied());
+            stmt.setDouble(10, bill.getHourlyRate());
+            stmt.setDouble(11, bill.getParkingFee());
+            stmt.setBoolean(12, bill.isLostTicket());
+            stmt.setBoolean(13, bill.isDailyCapApplied());
+            stmt.setDouble(14, bill.getTotalAmount());
             
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {

@@ -2,9 +2,14 @@
 CREATE DATABASE IF NOT EXISTS smart_parking_db;
 USE smart_parking_db;
 
--- Create parking_bills table
-CREATE TABLE IF NOT EXISTS parking_bills (
+-- Drop existing table to apply updated schema
+DROP TABLE IF EXISTS parking_bills;
+
+-- Create parking_bills table with owner details
+CREATE TABLE parking_bills (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    owner_name VARCHAR(100),
+    contact_number VARCHAR(20),
     vehicle_number VARCHAR(50) NOT NULL,
     vehicle_type VARCHAR(20) NOT NULL,
     entry_time DATETIME,
