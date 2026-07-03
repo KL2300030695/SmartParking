@@ -25,9 +25,9 @@
             </a>
             <div class="d-none d-md-flex align-items-center gap-1">
                 <a class="nav-link" href="index.jsp"><i class="bi bi-house-door me-1"></i>Home</a>
-                <a class="nav-link active" href="#"><i class="bi bi-receipt me-1"></i>Billing</a>
-                <a class="nav-link" href="#"><i class="bi bi-truck-front me-1"></i>Vehicles</a>
-                <a class="nav-link" href="#"><i class="bi bi-bar-chart-line me-1"></i>Reports</a>
+                <a class="nav-link active" href="index.jsp"><i class="bi bi-receipt me-1"></i>Billing</a>
+                <a class="nav-link" href="vehicles"><i class="bi bi-truck-front me-1"></i>Vehicles</a>
+                <a class="nav-link" href="reports"><i class="bi bi-bar-chart-line me-1"></i>Reports</a>
             </div>
             <span class="badge-online d-none d-sm-flex"><span class="dot"></span> System Online</span>
         </div>
